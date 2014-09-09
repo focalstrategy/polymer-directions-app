@@ -46,8 +46,10 @@
 					<paper-radio-button name="BICYCLING" label="Bicycling"></paper-radio-button><br>
 					<paper-radio-button name="TRANSIT" label="Transit"></paper-radio-button>
 				</paper-radio-group>
+				
 				<p>{{ response.routes[0].legs[0].distance.text }}, {{ response.routes[0].legs[0].duration.text }}</p>
 			</section>
+			
 			<div>
 				<paper-shadow z=1></paper-shadow>
 				<google-map map="{{map}}" latitude="" longitude=""></google-map>
@@ -56,6 +58,7 @@
 
 		<google-map-directions id="directions" map="{{map}}" startAddress="{{ startAddress }}" endAddress="{{ endAddress }}" travelMode="{{ travelMode }}" response="{{ response }}"></google-map-directions>
 
+		<!-- These elements allow persistance via Local Storage -->
 		<core-localstorage name="my-app-start" value="{{ startAddress }}"></core-localstorage>
 		<core-localstorage name="my-app-end" value="{{ endAddress }}"></core-localstorage>
 		<core-localstorage name="my-app-travelMode" value="{{ travelMode }}"></core-localstorage>
@@ -65,7 +68,7 @@
 		Polymer('directions-app', {
 			refreshTapAction: function(e, detail, sender) {
 				window.location.reload();
-	      	}
+		      	}
 		});
 	</script>
 </polymer-element>
