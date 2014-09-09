@@ -1,0 +1,76 @@
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-menu-button/core-menu-button.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-item/core-item.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+<link rel="import" href="../bower_components/core-menu-button/core-menu-button.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-item/core-item.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+<link rel="import" href="../bower_components/google-map/google-map-directions.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="directions-app">
+	<template>
+		<style>
+			core-toolbar {
+				background-color: #009688;
+				color: #f1f1f1;
+				fill: #f1f1f1;
+			}
+			google-map {
+				min-height: 300px;
+				display: block;
+			}
+			section {
+				padding: 1em;
+			}
+		</style>
+
+		<core-toolbar>
+			<span flex>My Demo App</span>
+			<core-tooltip label="Refresh">
+				<core-icon-button icon="refresh" on-tap="{{refreshTapAction}}"></core-icon-button>
+			</core-tooltip>
+		</core-toolbar>
+
+
+		<div>
+			<section>
+				<paper-input floatingLabel label="Start Address" value="{{ startAddress }}"></paper-input><br>
+				<paper-input floatingLabel label="End Address" value="{{ endAddress }}"></paper-input><br>
+				<paper-radio-group selected="{{ travelMode }}" horizontal layout>
+					<paper-radio-button name="DRIVING" label="Driving"></paper-radio-button><br>
+					<paper-radio-button name="WALKING" label="Walking"></paper-radio-button><br>
+					<paper-radio-button name="BICYCLING" label="Bicycling"></paper-radio-button><br>
+					<paper-radio-button name="TRANSIT" label="Transit"></paper-radio-button>
+				</paper-radio-group>
+				<p>{{ response.routes[0].legs[0].distance.text }}, {{ response.routes[0].legs[0].duration.text }}</p>
+			</section>
+			<div>
+				<paper-shadow z=1></paper-shadow>
+				<google-map map="{{map}}" latitude="" longitude=""></google-map>
+			</div>
+		</div>
+
+		<google-map-directions id="directions" map="{{map}}" startAddress="{{ startAddress }}" endAddress="{{ endAddress }}" travelMode="{{ travelMode }}" response="{{ response }}"></google-map-directions>
+
+	</template>
+
+	<script>
+		Polymer('directions-app', {
+			ready: function() {
+				this.$.directions.startAddress = 'Paignton';
+				this.$.directions.endAddress = 'Taunton';
+				this.$.directions.travelMode = 'DRIVING';
+			},
+			refreshTapAction: function(e, detail, sender) {
+				window.location.reload();
+	      	}
+		});
+	</script>
+</polymer-element>

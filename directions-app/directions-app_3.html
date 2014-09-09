@@ -1,0 +1,52 @@
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+<link rel="import" href="../bower_components/core-menu-button/core-menu-button.html">
+<link rel="import" href="../bower_components/core-icon-button/core-icon-button.html">
+<link rel="import" href="../bower_components/core-item/core-item.html">
+<link rel="import" href="../bower_components/core-tooltip/core-tooltip.html">
+<link rel="import" href="../bower_components/google-map/google-map.html">
+
+<polymer-element name="directions-app">
+	<template>
+		<style>
+			core-toolbar {
+				background-color: #009688;
+				color: #f1f1f1;
+				fill: #f1f1f1;
+			}
+			google-map {
+				min-height: 300px;
+				display: block;
+			}
+			section {
+				padding: 1em;
+			}
+		</style>
+
+		<core-toolbar>
+			<span flex>My Demo App</span>
+			<core-tooltip label="Refresh">
+				<core-icon-button icon="refresh" on-tap="{{refreshTapAction}}"></core-icon-button>
+			</core-tooltip>
+		</core-toolbar>
+
+		<google-map id="map" latitude="{{latitude}}" longitude="{{longitude}}"></google-map>
+	</template>
+
+	<script>
+		Polymer('directions-app', {
+			ready: function() {
+				this.$.map.latitude = 51.0;
+				this.$.map.longitude = -3.1;
+
+				var map = this.$.map;
+				var marker = document.createElement("google-map-marker");
+				marker.latitude = 51.015177;
+				marker.longitude = -3.102741;
+				map.appendChild(marker);
+			},
+			refreshTapAction: function(e, detail, sender) {
+				window.location.reload();
+	      	}
+		});
+	</script>
+</polymer-element>

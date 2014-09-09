@@ -1,0 +1,29 @@
+<link rel="import" href="../bower_components/core-toolbar/core-toolbar.html">
+
+<polymer-element name="directions-app">
+	<template>
+		<style>
+			core-toolbar {
+				background-color: #009688;
+				color: #f1f1f1;
+				fill: #f1f1f1;
+			}
+			google-map {
+				min-height: 300px;
+				display: block;
+			}
+			section {
+				padding: 1em;
+			}
+		</style>
+
+		<core-toolbar>
+			<span flex>My Demo App</span>
+		</core-toolbar>
+
+	</template>
+
+	<script>
+		Polymer('directions-app');
+	</script>
+</polymer-element>
